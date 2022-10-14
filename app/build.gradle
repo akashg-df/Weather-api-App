@@ -11,7 +11,7 @@ android {
         targetSdk 32
         versionCode 1
         def env = System.getenv()
-         versionName "1." + env['BUILD_NUMBER']
+         versionName "1.6.5" + env['BUILD_NUMBER']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
