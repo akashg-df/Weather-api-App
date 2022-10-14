@@ -10,7 +10,8 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        def env = System.getenv()
+         versionName "1." + env['BUILD_NUMBER']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
