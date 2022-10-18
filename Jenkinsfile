@@ -1,17 +1,18 @@
-pipeline{
-    agent any
-    tools{
-   Android sdk 'Android sdk'
+pipeline { 
+    agent any 
+    options {
+        skipStagesAfterUnstable()
     }
-    stages{
-        stage("SCM Checkout"){
-            steps{
-            git 'https://github.com/akashg-df/Weather-api-App.git'
+    stages {
+        stage('Build') { 
+            steps { 
+                sh 'assembledebug' 
             }
         }
-        stage("Android build"){
-            steps{
-                Task 'assembledebug'
+   
+        stage('Deploy') {
+            steps {
+                sh 'assembledebug'
             }
         }
     }
