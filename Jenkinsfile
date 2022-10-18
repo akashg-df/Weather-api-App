@@ -6,13 +6,13 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'C:\Program Files\Git\bin\\bash.exe' 
+                sh '' 
             }
         }
    
         stage('Deploy') {
             steps {
-                sh 'C:\Program Files\Git\bin\\bash.exe'
+                sh ''
             }
         }
     }
