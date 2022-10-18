@@ -6,15 +6,4 @@ pipeline {
                 // 
             }
         }
-        stage('Test') { 
-            steps {
-                // 
-            }
-        }
-        stage('Debug') { 
-            steps {
-                // 
-            }
-        }
-    }
-}
+    }}
