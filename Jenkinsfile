@@ -26,12 +26,7 @@ try {
         }
     }
   
-} catch (caughtError) { 
-    
-    err = caughtError
-    currentBuild.result = "FAILURE"
-
-} finally {
+}  finally {
     
     if(currentBuild.result == "FAILURE"){
               sh "echo 'Build FAILURE'"
