@@ -26,13 +26,5 @@ try {
         }
     }
   
-}  finally {
-    
-    if(currentBuild.result == "FAILURE"){
-              sh "echo 'Build FAILURE'"
-    }else{
-         sh "echo 'Build SUCCESSFUL'"
-    }
-   
-}
+}  
 
