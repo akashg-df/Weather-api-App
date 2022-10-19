@@ -8,11 +8,7 @@ try {
             git credentialsId: 'Gupta@092', url: 'https://github.com/akashg-df/Weather-api-App.git'
         }
       
-        stage('Dependencies') {
-            sh 'export C:\Program Files\Java\jdk-11.0.16\bin'
-             
-              }
-        
+      
         stage('Clean Build') {
                 dir("android") {
                     sh "pwd"
