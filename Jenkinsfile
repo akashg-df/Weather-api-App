@@ -9,7 +9,7 @@ try {
         }
       
         stage('Dependencies') {
-                sh 'export akash/AppData/Local/Android/Sdk
+            
                 sh 'export JAVA_HOME=/Java/jdk-11.0.16
                  
         }
