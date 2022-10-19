@@ -5,12 +5,11 @@ pipeline {
                     sh 'ls -al'
                     sh './gradlew clean'
                 }   
-        }
+          }}}
         
         stage('Build debug ') {
              dir("android") {
                 sh './gradlew assembledebug'
             }
         }
-    }
-}
+   
