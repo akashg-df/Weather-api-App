@@ -1,7 +1,8 @@
 pipeline { 
     agent any 
-    options {
-        skipStagesAfterUnstable()
+    environment {
+        Path =C:\Users\akash\AppData\Local\Android\Sdk
+    
     }
     stages {
         stage('Build') { 
