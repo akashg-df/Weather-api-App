@@ -1,37 +1,56 @@
-
-pipeline {
-    agent none{
+def err = null
+try {
   
-    Android {
+    node {
       
         stage('Preparation') { 
-            git credentialsId: 'Gupta@092', url: 'gh repo clone akashg-df/Weather-api-App'
+            git credentialsId: 'Gupta@092', url: 'https://github.com/akashg-df/Weather-api-App.git'
         }
-    }
+      
         stage('Dependencies') {
-            
-             implementation 'androidx.appcompat:appcompat:1.4.1'
-      implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-                 
+                sh 'implementation 'androidx.appcompat:appcompat:1.4.1'
+                sh 'implementation 'com.google.android.material:material:1.5.0'
+                sh ' implementation 'androidx.constraintlayout:constraintlayout:2.1.3''
+                sh 'testImplementation 'junit:junit:4.13.2'
+                sh 'androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+                sh 'androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0''
+                
         }
-        
+          
         stage('Clean Build') {
                 dir("android") {
+                    sh "pwd"
                     sh 'ls -al'
                     sh './gradlew clean'
                 }   
         }
         
-        stage('build.gradle ') {
+        stage('Build release ') {
+            parameters {
+                credentials credentialType: 'org.jenkinsci.plugins.plaincredentials.impl.FileCredentialsImpl', defaultValue: '5d34f6f7-b641-4785-frd5-c93b67e71b6b', description: '', name: 'keystore', required: true
+            }
             dir("android") {
                 sh './gradlew assembleRelease'
             }
         }
+      
+        stage('Compile') {
+            archiveArtifacts artifacts: '**/*.apk', fingerprint: true, onlyIfSuccessful: true            
+        }
     }
   
+} catch (caughtError) { 
+    
+    err = caughtError
+    currentBuild.result = "FAILURE"
 
-
+} finally {
+    
+    if(currentBuild.result == "FAILURE"){
+              sh "echo 'Build FAILURE'"
+    }else{
+         sh "echo 'Build SUCCESSFUL'"
+    }
+   
+}
+view rawJenkinsfile hosted with ❤ by GitHub
