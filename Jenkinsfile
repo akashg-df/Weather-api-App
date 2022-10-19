@@ -2,38 +2,33 @@
 def err = null
 try {
   
-    node {
+    Android {
       
         stage('Preparation') { 
             git credentialsId: 'Gupta@092', url: 'gh repo clone akashg-df/Weather-api-App'
         }
       
         stage('Dependencies') {
-                sh 'sudo npm install -g react-native-cli'
-                sh 'npm install'
-                sh 'react-native link'
-                sh 'export JAVA_HOME=/opt/jdk1.8.0_201'
-                sh 'export JRE_HOME=/opt/jdk1.8.0_201/jre'
-                sh 'export PATH=$PATH:/opt/jdk1.8.0_201/bin:/opt/jdk1.8.0_201/jre/bin'
-                sh 'echo $JAVA_HOME'
+                sh 'Users/akash/AppData/Local/Android/Sdk
+                sh 'export JAVA_HOME=/Java/jdk-11.0.16
+                 
         }
         
         stage('Clean Build') {
                 dir("android") {
-                    sh "pwd"
                     sh 'ls -al'
                     sh './gradlew clean'
                 }   
         }
         
-        stage('Build release ') {
+        stage('build.gradle ') {
             dir("android") {
                 sh './gradlew assembleRelease'
             }
         }
       
         stage('Compile') {
-            archiveArtifacts artifacts: '**/*.apk', fingerprint: true, onlyIfSuccessful: true            
+            archiveArtifacts artifacts: app\build\outputs\apk\debug\*.apk       
         }
     }
   
