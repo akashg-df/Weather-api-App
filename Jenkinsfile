@@ -1,12 +1,13 @@
 pipeline { 
     agent any 
-    environment {
+    Android {  
+        C:\Users\akash\AppData\Local\Android\Sdk
 
     }
     stages {
         stage('Build') { 
             steps { 
-                sh 'ls' 
+                sh 'build.gradle' 
             }
         }
    
