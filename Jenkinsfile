@@ -12,10 +12,7 @@
             }
         }
       
-        stage('Compile') {
-            archiveArtifacts artifacts: '**/*.apk', fingerprint: true, onlyIfSuccessful: true            
-        }
-    }
+
   
 } catch (caughtError) { 
     
