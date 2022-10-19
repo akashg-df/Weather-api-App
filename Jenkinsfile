@@ -7,16 +7,7 @@ try {
             git credentialsId: 'Gupta@092', url: 'https://github.com/akashg-df/Weather-api-App.git'
         }
       
-        stage('Dependencies') {
-                sh 'implementation 'androidx.appcompat:appcompat:1.4.1'
-                sh 'implementation 'com.google.android.material:material:1.5.0'
-                sh ' implementation 'androidx.constraintlayout:constraintlayout:2.1.3''
-                sh 'testImplementation 'junit:junit:4.13.2'
-                sh 'androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-                sh 'androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0''
-                
-        }
-          
+                 
         stage('Clean Build') {
                 dir("android") {
                     sh "pwd"
