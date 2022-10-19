@@ -1,17 +1,13 @@
 
 pipeline {
-    agent none
-    environment {
-        VERSION = sh 'C:\Users\akash\AppData\Local\Android\Sdk'
-    }
-}
+    agent none{
   
     Android {
       
         stage('Preparation') { 
             git credentialsId: 'Gupta@092', url: 'gh repo clone akashg-df/Weather-api-App'
         }
-      
+    }
         stage('Dependencies') {
             
              implementation 'androidx.appcompat:appcompat:1.4.1'
