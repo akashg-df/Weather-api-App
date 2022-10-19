@@ -30,7 +30,7 @@ if (branch == master) {
         }
     }
   
-} catch (caughtError) { 
+ catch (caughtError) { 
     
     err = caughtError
     currentBuild.result = "FAILURE"
@@ -43,4 +43,4 @@ if (branch == master) {
          sh "echo 'Build SUCCESSFUL'"
     }
    
-}
+ }}
