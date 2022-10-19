@@ -1,8 +1,7 @@
 pipeline { 
     agent any 
     environment {
-        Path =C:\Users\akash\AppData\Local\Android\Sdk
-    
+
     }
     stages {
         stage('Build') { 
