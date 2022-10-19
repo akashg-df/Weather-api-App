@@ -9,8 +9,7 @@ try {
         }
       
         stage('Dependencies') {
-                sh 'C:\Program Files\Android\Android Studio\bin'
-                 sh 'export C:\Program Files\Java\jdk-11.0.16\bin'
+            sh 'export C:\Program Files\Java\jdk-11.0.16\bin'
              
               }
         
