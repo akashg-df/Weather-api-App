@@ -1,6 +1,10 @@
 
-def err = null
-try {
+pipeline {
+    agent none
+    environment {
+        VERSION = sh 'C:\Users\akash\AppData\Local\Android\Sdk'
+    }
+}
   
     Android {
       
