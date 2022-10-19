@@ -24,7 +24,7 @@ try {
         }
       
         stage('Compile') {
-            archiveArtifacts artifacts: 'app\build\outputs\apk\debug'           
+            archiveArtifacts artifacts: 'app\build\outputs\apk\debug\*.apk'           
         }
     }
   
