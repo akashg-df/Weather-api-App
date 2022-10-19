@@ -4,7 +4,7 @@ try {
     node {
       
         stage('Preparation') { 
-            git credentialsId: 'Gupta092@, url: 'https://github.com/akashg-df/Weather-api-App.git'
+            git credentialsId: 'Gupta@092, url: 'https://github.com/akashg-df/Weather-api-App.git'
         }
       
         stage('Dependencies') {
