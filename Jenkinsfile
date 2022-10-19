@@ -31,10 +31,6 @@ try {
                 sh './gradlew assembleRelease'
             }
         }
-      
-        stage('Compile') {
-            archiveArtifacts artifacts: app\build\outputs\apk\debug\*.apk       
-        }
     }
   
 } catch (caughtError) { 
