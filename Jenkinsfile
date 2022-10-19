@@ -1,7 +1,4 @@
-def err = null
-try {
-  
-    node {    
+   node {    
         stage('Clean Build') {
                 dir("android") {
                     sh "pwd"
