@@ -1,10 +1,6 @@
 
 pipeline {
-    agent {
-        // Run on a build agent where we have the Android SDK installed
-        
-    }
-         stages {
+      stages {
         stage('Start Build') {
             steps {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
