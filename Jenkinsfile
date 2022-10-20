@@ -73,7 +73,7 @@ pipeline {
             }
         }
        
-        }
+       
         stage('Finished') {
             steps {
                 echo 'Finished'
