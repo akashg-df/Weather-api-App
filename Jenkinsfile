@@ -6,18 +6,11 @@ pipeline {
     }
     environment {
         // Fastlane Environment Variables
-        PATH = "$HOME/.fastlane/bin:" +
-                "$HOME/.rvm/gems/ruby-2.5.3/bin:" +
-                "$HOME/.rvm/gems/ruby-2.5.3@global/bin:" +
-                "$HOME/.rvm/rubies/ruby-2.5.3/bin:" +
-                "/usr/local/bin:" +
-                "$PATH"
+        PATH = "$C:\Users\akash\AppData\Local\Android\Sdk"
+                "$C:\Program Files\Java"
+              
             }
-    options {
-        // Stop the build early in case of compile or test failures
-        skipStagesAfterUnstable()
-    }
-    stages {
+        stages {
         stage('Start Build') {
             steps {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
