@@ -2,7 +2,7 @@
 pipeline {
     agent {
         // Run on a build agent where we have the Android SDK installed
-        label 'window'
+        label 'Built-In Node'
     }
          stages {
         stage('Start Build') {
