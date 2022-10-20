@@ -3,7 +3,9 @@ pipeline {
       agent {
             node {
                 label "master"
-                        }}
+                        
+            }
+      }
       stages {
         stage('Start Build') {
             steps {
