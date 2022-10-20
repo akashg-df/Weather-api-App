@@ -4,13 +4,7 @@ pipeline {
         // Run on a build agent where we have the Android SDK installed
         label 'android'
     }
-    environment {
-        // Fastlane Environment Variables
-        PATH = "$C:\Users\akash\AppData\Local\Android\Sdk"
-                "$C:\Program Files\Java"
-              
-            }
-        stages {
+         stages {
         stage('Start Build') {
             steps {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
