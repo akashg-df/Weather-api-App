@@ -79,6 +79,6 @@ pipeline {
                 echo 'Finished'
             }
         }
-    }
     
-}
+    
+
