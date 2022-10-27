@@ -1,62 +1,45 @@
 
 pipeline {
-      agent {
-            node {
-                label "WeatherApiApp"
-                        
-            }
+  agent {
+    // Run on a build agent where we have the Android SDK installed
+    label 'android'
+  }
+  options {
+    // Stop the build early in case of compile or test failures
+    skipStagesAfterUnstable()
+  }
+  stages {
+    stage('Compile') {
+      steps {
+        // Compile the app and its dependencies
+        sh './gradlew compileDebugSources'
       }
-      stages {
-        stage('Start Build') {
-            steps {
-                bitbucketStatusNotify(buildState: 'INPROGRESS')
-            }
-        }
-               stage('Copy Local Properties') {
-            steps {
-                script {
-                    def projName = PROJECT_NAME.replaceAll(" ", "_").toLowerCase()
-                    sh "cp ~/Documents/${projName}/local.properties ."
-                }
-            }
-        }
-        
-        stage('Build App') {
-            steps {
-                // Clean and assemble APKs
-                sh './gradlew clean assembleDebug assembleRelease'
+    }
+  
+    stage('Build APK') {
+      steps {
+        // Finish building and packaging the APK
+        sh './gradlew assembleDebug'
 
-               }
-            }
-        }
-       
-        }
-        stage('Archive Files') {
-            steps {
-                // Archive the APKs so that they can be downloaded from Jenkins
-                echo 'Archiving APKs...'
-                archiveArtifacts '**/*.apk'
-
-                script {
-                    if (PROGUARD_ENABLED == "true") {
-                        echo 'Archiving Mappings...'
-                        archiveArtifacts '**/mapping.txt'
-                    }
-
-                    if (env.BRANCH_NAME.startsWith("release")) {
-                        echo 'Archiving AABs...'
-                        archiveArtifacts '**/*.aab'
-                    }
-                }
-            }
-        }
-       
-       
-        stage('Finished') {
-            steps {
-                echo 'Finished'
-            }
-        }
-    
-    
-
+        // Archive the APKs so that they can be downloaded from Jenkins
+        archiveArtifacts '**/*.apk'
+      }
+    }
+    stage('Static analysis') {
+      steps {
+        // Run Lint and analyse the results
+        sh './gradlew lintDebug'
+        androidLint pattern: '**/lint-results-*.xml'
+      }
+    }
+    stage('Deploy') {
+      when {
+        // Only execute this stage when building from the `beta` branch
+        branch 'main'
+      }
+     
+      
+    }
+  }
+  
+}
