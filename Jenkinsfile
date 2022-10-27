@@ -34,7 +34,7 @@ pipeline {
     }
     stage('Deploy') {
       when {
-        // Only execute this stage when building from the `beta` branch
+        // Only execute this stage when building from the `main` branch
         branch 'main'
       }
      
