@@ -6,18 +6,11 @@ agent any
                 echo'Runing build phase'
             }
         }
-        stage ('Test') { 
-        
-        }
-        stage ('QA') { 
+       stage ('QA') { 
         
         }
         stage ('Deploy') { 
         
         }
-        stage ('Monitor') { 
- 
-        }
- 
-    }           
+         }           
  }
