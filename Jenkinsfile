@@ -7,10 +7,7 @@ agent any
             }
         }
        stage ('QA') { 
+           steps{
+            echo''
+           }
         
-        }
-        stage ('Deploy') { 
-        
-        }
-         }           
- }
