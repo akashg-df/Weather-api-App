@@ -1,13 +1,15 @@
-pipeline { 
-agent any 
-    stages { 
-        stage ('Build') { 
-            steps{
-                echo'Runing build phase'
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
             }
         }
-       stage ('QA') { 
-           steps{
-            echo''
-           }
         
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
