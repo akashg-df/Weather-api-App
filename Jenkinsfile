@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    stages {
+
          stage("Build"){
     if (params.BUILD_CONFIG == 'release') {
       sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
@@ -16,4 +16,4 @@ pipeline {
             }
         }
     }
-}
+
