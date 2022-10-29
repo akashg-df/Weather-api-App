@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh './gradlew clean assembleDebug assembleRelease'
+
             }
         }
         
