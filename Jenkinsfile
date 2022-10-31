@@ -22,7 +22,7 @@ pipeline{
     finally {
     
     if(currentBuild.result == "FAILURE"){
-              sh "echo 'Build FAILURE'"
+              bat "echo 'Build FAILURE'"
     }else{
          bat "echo 'Build SUCCESSFUL'"
     }
