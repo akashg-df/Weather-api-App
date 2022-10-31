@@ -1,8 +1,6 @@
 pipeline{
     agent any
-    
    
-    
     stages{
         stage("SCM Checkout"){
             steps{
@@ -13,9 +11,7 @@ pipeline{
             steps{
                 bat 'gradlew assembleRelease'
             }
-             steps{
-                bat 'gradlew assembledebug'
-            }
+           
         }
     
      stage('Unit test') {
