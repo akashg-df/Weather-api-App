@@ -13,7 +13,12 @@ pipeline{
             }
            
         }
-    
+         stage("Android build"){
+            steps{
+                bat 'gradlew assembledebug'
+            }
+           
+        }
      stage('Unit test') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
