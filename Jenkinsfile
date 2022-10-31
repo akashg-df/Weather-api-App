@@ -7,13 +7,13 @@ pipeline{
             git 'https://github.com/akashg-df/Weather-api-App'
             }
         }
-        stage("Android build"){
+        stage("Android Release"){
             steps{
                 bat 'gradlew assembleRelease'
             }
            
         }
-         stage("Android build"){
+         stage("Android Debug"){
             steps{
                 bat 'gradlew assembledebug'
             }
