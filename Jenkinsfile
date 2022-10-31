@@ -1,19 +1,20 @@
-pipeline {
-    agent any
+node {
+  // Mark the code checkout 'stage'....
+  stage 'Stage Checkout'
 
+  // Checkout code from repository and update any submodules
+  checkout scm
+  sh 'git submodule update --init'  
 
-         stage("Build"){
-    if (params.BUILD_CONFIG == 'release') {
-      sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
-    } else {
-      sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
-    }
+  stage 'Stage Build'
+
+  //branch name from Jenkins environment variables
+  echo "My branch is: ${env.build.gradle}"
+
+  stage 'Stage Archive'
+  //tell Jenkins to archive the apks
+  archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
+
   }
-        
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
 
+}
