@@ -1,20 +1,18 @@
-node {
-  // Mark the code checkout 'stage'....
-  stage 'Stage Checkout'
-
-  // Checkout code from repository and update any submodules
-  checkout scm
-  sh 'git submodule update --init'  
-
-  stage 'Stage Build'
-
-  //branch name from Jenkins environment variables
-  echo "My branch is: ${env.build.gradle}"
-
-  stage 'Stage Archive'
-  //tell Jenkins to archive the apks
-  archiveArtifacts artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true
-
-  }
-
-
+pipeline{
+    agent any
+    tools{
+        Android 'Android'
+    }
+    stages{
+        stage("SCM Checkout"){
+            steps{
+            git 'https://github.com/akashg-df/Weather-api-App'
+            }
+        }
+        stage("Android build"){
+            steps{
+                bat 'assembledebug'
+            }
+        }
+    }
+}
