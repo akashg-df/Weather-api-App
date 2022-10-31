@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    enviroment{
+        bat '$build.gradle
+    }
     
     stages{
         stage("SCM Checkout"){
@@ -10,6 +13,9 @@ pipeline{
         stage("Android build"){
             steps{
                 bat 'gradlew assembleRelease'
+            }
+             steps{
+                bat 'gradlew assembledebug'
             }
         }
     
