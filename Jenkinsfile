@@ -1,7 +1,6 @@
 pipeline{
     agent any
-    enviroment{
-        bat '$build.gradle
+    
    
     
     stages{
@@ -27,4 +26,4 @@ pipeline{
     }
       }
     }
-}
+
