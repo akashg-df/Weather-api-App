@@ -7,14 +7,14 @@ pipeline{
             git 'https://github.com/akashg-df/Weather-api-App'
             }
         }
-        if
+        
         stage("Android Release"){
             steps{
                 bat 'gradlew assembleRelease'
             }
            
         }
-        else
+        
          stage("Android Debug"){
             steps{
                 bat 'gradlew assembledebug'
@@ -27,6 +27,9 @@ pipeline{
         bat './gradlew testDebugUnitTest'
       }
     }
+         stage('Compile') {
+            archiveArtifacts artifacts: '**/*.apk', fingerprint: true, onlyIfSuccessful: true            
+        }
       }
     }
 
