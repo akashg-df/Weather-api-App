@@ -20,11 +20,17 @@ pipeline{
       }
     }
       }
-    finally {
+    }
+catch (caughtError) { 
+    
+    err = caughtError
+    currentBuild.result = "FAILURE"
+
+} finally {
     
     if(currentBuild.result == "FAILURE"){
-              bat "echo 'Build FAILURE'"
+              sh "echo 'Build FAILURE'"
     }else{
-         bat "echo 'Build SUCCESSFUL'"
+         sh "echo 'Build SUCCESSFUL'"
     }
-}
+   
