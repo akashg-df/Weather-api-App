@@ -34,4 +34,4 @@ pipeline{
             archiveArtifacts artifacts: '**/*.apk',      
         }
     }
-
+}
