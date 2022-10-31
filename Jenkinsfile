@@ -33,5 +33,4 @@ pipeline{
      stage('Compile') {
             archiveArtifacts artifacts: '**/*.apk',      
         }
-    }
-}
+    
