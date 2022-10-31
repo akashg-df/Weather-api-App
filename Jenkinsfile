@@ -19,7 +19,13 @@ pipeline{
         bat './gradlew testDebugUnitTest'
       }
     }
+    finally {
     
+    if(currentBuild.result == "FAILURE"){
+              sh "echo 'Build FAILURE'"
+    }else{
+         bat "echo 'Build SUCCESSFUL'"
+    }
     }
     
 }
