@@ -9,7 +9,7 @@ pipeline{
         }
         stage("Android build"){
             steps{
-                bat 'gradlew assembledebug'
+                bat 'gradlew assembleRelease'
             }
         }
     }
