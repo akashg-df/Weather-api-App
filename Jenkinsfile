@@ -1,8 +1,6 @@
 pipeline{
     agent any
-    tools{
-        Android 'Android'
-    }
+    
     stages{
         stage("SCM Checkout"){
             steps{
