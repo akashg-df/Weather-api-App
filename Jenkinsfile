@@ -10,17 +10,17 @@ pipeline{
         
         stage("Android Release"){
             steps{
-                bat 'gradlew${build.gradle}'
+                bat 'gradlew assembleRelease'
             }
            
         }
         
-//          stage("Android Debug"){
-//             steps{
-//                 bat 'gradlew assembledebug'
-//             }
+         stage("Android Debug"){
+            steps{
+                bat 'gradlew assembledebug'
+            }
            
-//         }
+        }
      stage('Unit test') {
       steps {
         // Compile and run the unit tests for the app and its dependencies
