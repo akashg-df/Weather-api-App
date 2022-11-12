@@ -10,7 +10,7 @@ pipeline{
         
         stage("Android Release"){
             steps{
-                echo "${build.gardle}"
+                bat "${build.gardle}"
             }
            
         }
