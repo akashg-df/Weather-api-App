@@ -1,18 +1,42 @@
-class Constants {
+pipeline{
+	    agent any
+	   
+	    stages{
+	        stage("SCM Checkout"){
+	            steps{
+	            git 'https://github.com/akashg-df/Weather-api-App'
+	            }
+	        }
+          stage("Build"){
+               if (params.BUILD_CONFIG == 'release') {
+               sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
+               } else {
+               sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
+                }
+             }
+	        
+// 	        stage("Android Release"){
+// 	            steps{
+// 	                bat './gradlew clean assembleDebug assembleRelease'
+// 	            }
+	           
+// 	        }
+	        
+	//          stage("Android Debug"){
+	//             steps{
+	//                 bat 'gradlew assembledebug'
+	//             }
+	           
+	//         }
+	     stage('Unit test') {
+	      steps {
+	        // Compile and run the unit tests for the app and its dependencies
+	        bat './gradlew testDebugUnitTest'
+	      }
+	    }
+	        
+	        
+	    }
+	}
+	   
 
-    static final String MASTER_BRANCH = 'master'
-
-    static final String QA_BUILD = 'Debug'
-    static final String RELEASE_BUILD = 'Release'
-
- 
-}
-
-def getBuildType() {
-    switch (env.BRANCH_NAME) {
-        case Constants.MASTER_BRANCH:
-            return Constants.RELEASE_BUILD
-        default:
-            return Constants.QA_BUILD
-    }
-}
