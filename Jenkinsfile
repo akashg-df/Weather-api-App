@@ -10,7 +10,7 @@ pipeline{
         
         stage("Android Release"){
             steps{
-                bat "${build.gardle}"
+                bat './gradlew clean assembleDebug assembleRelease'
             }
            
         }
