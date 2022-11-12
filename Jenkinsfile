@@ -1,6 +1,8 @@
 
 
-node("android"){
+pipeline{
+	    agent any
+
   stage("Checkout"){
     checkout scm
   }
@@ -59,4 +61,5 @@ node("android"){
         archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-debug.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
     }
   }
+}
 }
