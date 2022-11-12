@@ -1,65 +1,73 @@
-
-
 pipeline{
 	    agent any
-
-  stage("Checkout"){
-    checkout scm
-  }
-
-  stage ("Prepare"){
-    sh 'chmod +x ./gradlew'
-  }
-
-    stage("Build"){
-    if (params.BUILD_CONFIG == 'release') {
-      sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
-    } else {
-      sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
-    }
-  }
-
-//   def keyStoreId = params.BUILD_CREDENTIAL_ID
-//   def keyAlias = params.BUILD_CREDENTIAL_ALIAS ?: ''
-// Uncomment this stage if your keystore is external to your source code.  
-//  stage("Sign"){
-//    if (params.BUILD_CONFIG == 'release') {
-//        signAndroidApks (
-//            keyStoreId: keyStoreId,
-//            keyAlias: keyAlias,
-//            apksToSign: "**/*-unsigned.apk",
-            // uncomment the following line to output the signed APK to a separate directory as described above
-            // signedApkMapping: [ $class: UnsignedApkBuilderDirMapping ],
-            // uncomment the following line to output the signed APK as a sibling of the unsigned APK, as described above, or just omit signedApkMapping
-            // you can override these within the script if necessary
-            // androidHome: '/usr/local/Cellar/android-sdk'
-       // )
-//    } else {
-//      println('Debug Build - Using default developer signing key')
-//    }
-// }
-
-// stage('Kryptowire') {
-//   //using a try-catch block so the pipeline script won't fail if the krypowire plugin is not installed
-//   try {
-//     if (params.BUILD_CONFIG == 'release') {
-//       kwSubmit filePath: "app/build/outputs/apk/release/app-release.apk", platform: 'android'
-//     } else {
-//       kwSubmit filePath: "app/build/outputs/apk/debug/app-debug.apk", platform: 'android'
-//     }
-//   } catch(Error e) {
-//         e.printStackTrace()
-//   }
-// }
-
-    
-
- stage("Archive"){
-    if (params.BUILD_CONFIG == 'release') {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-release.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
-    } else {
-        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-debug.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
-    }
-  }
-}
+	   
+	    stages{
+	        stage("SCM Checkout"){
+	            steps{
+	            git 'https://github.com/akashg-df/Weather-api-App'
+	            }
+	        }
+	         
+          stage('Setup parameters') {
+            steps {
+                script { 
+                    properties([
+                        parameters([
+                            choice(
+                                defaultValue: 'RELEASE', 
+                                choices: ['RELEASE', 'DEBUG'], 
+                                name: 'BUILD_CONFIG'
+                            ),
+                        ])
+                    ])
+			 stage('Build release'){
+            when {
+                expression {
+                   return params.BUILD_CONFIG == 'RELEASE'
+                }
+            }
+//             steps{
+//                 script {
+//                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+//                     bat "\"${msbuild}\" /Source/project-GRDK.sln /t:Rebuild  /p:configuration=\"Release Steam D3D11\""
+//                 }
+//             }
+        }
+        stage('Build debug'){
+            when {
+                expression {
+                   return params.BUILD_CONFIG == 'DEBUG'
+                }
+            }
+//             steps{
+//                 script {
+//                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
+//                     bat "\"${msbuild}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug Steam D3D11\""
+//                 }
+//             }
+        }
+// 	        stage("Android Release"){
+// 	            steps{
+// 	                bat './gradlew clean assembleDebug assembleRelease'
+// 	            }
+	           
+// 	        }
+	        
+	//          stage("Android Debug"){
+	//             steps{
+	//                 bat 'gradlew assembledebug'
+	//             }
+	           
+	//         }
+	     stage('Unit test') {
+	      steps {
+	        // Compile and run the unit tests for the app and its dependencies
+	        bat './gradlew testDebugUnitTest'
+	      }
+	    }
+	        
+	        
+	    }
+	}
+	   
 
