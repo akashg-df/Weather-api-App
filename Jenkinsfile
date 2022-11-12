@@ -65,7 +65,6 @@ pipeline{
 	        bat './gradlew testDebugUnitTest'
 	      }
 	    }
-	        
-	        
+	   }
 	    }
 	
