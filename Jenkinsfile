@@ -28,13 +28,19 @@ pipeline{
 	//             }
 	           
 	//         }
-	     stage('Unit test') {
-	      steps {
-	        // Compile and run the unit tests for the app and its dependencies
-	        bat './gradlew testDebugUnitTest'
-	      }
-	    }
-	        
+// 	     stage('Unit test') {
+// 	      steps {
+// 	        // Compile and run the unit tests for the app and its dependencies
+// 	        bat './gradlew testDebugUnitTest'
+// 	      }
+// 	    }
+	        stage("Archive"){
+    if (params.BUILD_CONFIG == 'release') {
+        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-release.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
+    } else {
+        archiveArtifacts artifacts: 'app/build/outputs/apk/**/app-debug.apk', excludes: 'app/build/outputs/apk/*-unaligned.apk'
+    }
+  }
 	        
 	    }
 	}
