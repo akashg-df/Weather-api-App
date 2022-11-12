@@ -1,4 +1,4 @@
-**
+
 * Android Jenkinsfile
 */
 node("android"){
