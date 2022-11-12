@@ -1,34 +1,19 @@
-pipeline{
-    agent any
-   
-    stages{
-        stage("SCM Checkout"){
-            steps{
-            git 'https://github.com/akashg-df/Weather-api-App'
-            }
-        }
-        
-        stage("Android Release"){
-            steps{
-                bat './gradlew clean assembleDebug assembleRelease'
-            }
-           
-        }
-        
-//          stage("Android Debug"){
-//             steps{
-//                 bat 'gradlew assembledebug'
-//             }
-           
-//         }
-     stage('Unit test') {
-      steps {
-        // Compile and run the unit tests for the app and its dependencies
-        bat './gradlew testDebugUnitTest'
-      }
-    }
-        
-        
+class Constants {
+
+    static final String MASTER_BRANCH = 'master'
+
+    static final String QA_BUILD = 'Debug'
+    static final String RELEASE_BUILD = 'Release'
+
+    static final String INTERNAL_TRACK = 'internal'
+    static final String RELEASE_TRACK = 'release'
+}
+
+def getBuildType() {
+    switch (env.BRANCH_NAME) {
+        case Constants.MASTER_BRANCH:
+            return Constants.RELEASE_BUILD
+        default:
+            return Constants.QA_BUILD
     }
 }
-    
