@@ -9,9 +9,9 @@ pipeline{
 	        }
           stage("Build"){
                if (params.BUILD_CONFIG == 'release') {
-               sh './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
+               bat './gradlew clean assembleRelease' // builds app/build/outputs/apk/app-release.apk file
                } else {
-               sh './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
+               bat './gradlew clean assembleDebug' // builds app/build/outputs/apk/app-debug.apk
                 }
              }
 	        
