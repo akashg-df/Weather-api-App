@@ -28,7 +28,7 @@ pipeline{
             }
              steps{
                 script {
-                    def 'Gradle' = tool name: 'Gradle', type: 'hudson.plugins.Gradle.GradleInstallation'
+                   def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
                     bat './gradlew assembleRelease
                  }
              }
@@ -41,7 +41,7 @@ pipeline{
             }
             steps{
                 script {
-                     def 'Gradle' = tool name: 'Gradle', type: 'hudson.plugins.Gradle.GradleInstallation'
+                   def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation''
                      bat './gradlew assembledebug
                  }
              }
