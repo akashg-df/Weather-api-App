@@ -6,7 +6,7 @@ pipeline{
 	                     git 'https://github.com/akashg-df/Weather-api-App'
 	                   }
 	                }
-          }
+          
           stage('Setup parameters') {
             steps {
                 script { 
@@ -21,7 +21,7 @@ pipeline{
                     ])
                 }
             }
-          }
+          
            stage('Build release'){
             when {
                 expression {
@@ -37,4 +37,6 @@ pipeline{
                 }
             }
         }
+          }
+    }
 }
