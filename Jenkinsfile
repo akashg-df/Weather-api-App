@@ -1,7 +1,7 @@
 pipeline{
   agent any
-	      stages{
-	          stage("SCM Checkout"){
+	      stage{
+	          stages("SCM Checkout"){
 	              steps{
 	                     git 'https://github.com/akashg-df/Weather-api-App'
 	                   }
