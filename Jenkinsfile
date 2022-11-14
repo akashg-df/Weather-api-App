@@ -28,7 +28,6 @@ pipeline{
             }
              steps{
                 script {
-                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle'
                     bat \"${Build.gardle}\" gradlew assembleRelease"
                  }
              }
@@ -41,8 +40,7 @@ pipeline{
             }
             steps{
                 script {
-                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle'
-                     bat \"${Build.gardle}\"  gradlew assembleRelease"
+                   bat \"${Build.gardle}\"  gradlew assembleRelease"
                  }
              }
         }
