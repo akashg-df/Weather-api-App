@@ -9,7 +9,6 @@ pipeline{
           
           stage('Setup parameters') {
             steps {
-                script { 
                     properties([
                         parameters([
                             choice(
@@ -19,7 +18,6 @@ pipeline{
                             ),
                         ])
                     ])
-                }
             }
           
            stage('Build release'){
