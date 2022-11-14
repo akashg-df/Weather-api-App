@@ -7,7 +7,7 @@ pipeline{
 	                   }
 	                }
           
-          stage('Setup parameters') {
+          stages('Setup parameters') {
             steps {
                     properties([
                         parameters([
@@ -18,14 +18,14 @@ pipeline{
                             ),
                         ])
                     ])
-           stage('Build release'){
+           stages('Build release'){
             when {
                 expression {
                    return params.BUILD_CONFIG == 'RELEASE'
                 }
             }      
         }
-        stage('Build debug'){
+        stages('Build debug'){
             when {
                 expression {
                    return params.BUILD_CONFIG == 'DEBUG'
