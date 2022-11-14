@@ -1,38 +1,37 @@
+parameters {
+  choice choices: ['', 'RELEASE', 'DEBUG'], name: '$build.gardle'
+}
 pipeline{
   agent any
-	      stage{
-	          stage("SCM Checkout"){
-	              steps{
-	                     git 'https://github.com/akashg-df/Weather-api-App'
-	                   }
-	                }
+ 
+  stages{
+      stage("SCM Checkout"){
+          steps{
+          git 'https://github.com/akashg-df/Weather-api-App'
           }
-          stage('Setup parameters') {
-            steps {
-                    properties([
-                        parameters([
-                            choice(
-                                defaultValue: 'RELEASE', 
-                                choices: ['RELEASE', 'DEBUG'], 
-                                name: '$Build.gardle'
-                            ),
-                        ])
-                    ])
-           stage('Build release'){
-            when {
-                expression {
-                   return params.'$Build.gardle' == 'RELEASE'
-                }
-            }      
-        }
-        stage('Build debug'){
-            when {
-                expression {
-                   return params.'$Build.gardle' == 'DEBUG'
-                }
+      }
+      
+      stage("Android Release"){
+          steps{
+              bat './gradlew assembleRelease'
+          }
+         
+      }
+      
+         stage("Android Debug"){
+            steps{
+                bat 'gradlew assembledebug'
             }
+         
         }
-          }
-          }
-    
+   stage('Unit test') {
+    steps {
+      // Compile and run the unit tests for the app and its dependencies
+      bat './gradlew testDebugUnitTest'
+    }
+  }
+      
+      
+  }
 }
+ 
