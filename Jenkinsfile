@@ -1,34 +1,34 @@
 pipeline{
   agent any
-	      stages{
+	      stage{
 	          stage("SCM Checkout"){
 	              steps{
 	                     git 'https://github.com/akashg-df/Weather-api-App'
 	                   }
 	                }
           
-          stages('Setup parameters') {
+          stage('Setup parameters') {
             steps {
                     properties([
                         parameters([
                             choice(
                                 defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: 'BUILD_CONFIG'
+                                name: 'Build.gardle'
                             ),
                         ])
                     ])
-           stages('Build release'){
+           stage('Build release'){
             when {
                 expression {
-                   return params.BUILD_CONFIG == 'RELEASE'
+                   return params.'Build.gardle' == 'RELEASE'
                 }
             }      
         }
-        stages('Build debug'){
+        stage('Build debug'){
             when {
                 expression {
-                   return params.BUILD_CONFIG == 'DEBUG'
+                   return params.'Build.gardle' == 'DEBUG'
                 }
             }
         }
