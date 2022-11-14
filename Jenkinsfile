@@ -18,15 +18,12 @@ pipeline{
                             ),
                         ])
                     ])
-            }
-          
            stage('Build release'){
             when {
                 expression {
                    return params.BUILD_CONFIG == 'RELEASE'
                 }
-            }
-//            
+            }      
         }
         stage('Build debug'){
             when {
@@ -35,6 +32,7 @@ pipeline{
                 }
             }
         }
+          }
           }
     }
 }
