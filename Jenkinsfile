@@ -28,6 +28,7 @@ pipeline{
             }
              steps{
                 script {
+                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle.Build.gardleInstallation'
                     bat "\"${Build.gardle}\" /Source/project-GRDK.sln /t:Rebuild  /p:configuration=\"Release\""
                  }
              }
@@ -40,12 +41,14 @@ pipeline{
             }
             steps{
                 script {
-                   bat "\"${Build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug \""
+                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle.Build.gardleInstallation'
+                     bat "\"${Build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug\""
                  }
              }
         }
-                }
+ 	                       }
             }
           }
         }
 }
+	    
