@@ -28,8 +28,8 @@ pipeline{
             }
              steps{
                 script {
-                   def Build.gardle = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle.Build.gardleInstallation'
-                   bat "\"${Build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Release\""
+                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle'
+                    bat \"${Build.gardle}\" gradlew assembleRelease"
                  }
              }
         }
@@ -41,12 +41,12 @@ pipeline{
             }
             steps{
                 script {
-                   def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                     bat "\"${Build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug \""
+                    def 'Build.gardle' = tool name: 'Build.gardle', type: 'hudson.plugins.Build.gardle'
+                     bat \"${Build.gardle}\"  gradlew assembleRelease"
                  }
              }
         }
- 	     }
+ 	                       }
             }
           }
         }
