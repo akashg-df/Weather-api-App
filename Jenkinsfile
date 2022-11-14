@@ -1,14 +1,15 @@
- pipeline{
- stages{
-   agent any
-          stage("SCM Checkout"){
+pipeline{
+  agent any
+	      stage{
+	          stage("SCM Checkout"){
 	              steps{
 	                     git 'https://github.com/akashg-df/Weather-api-App'
 	                   }
 	                }
           
           stage('Setup parameters') {
-                properties([
+            steps {
+                    properties([
                         parameters([
                             choice(
                                 defaultValue: 'RELEASE', 
@@ -31,7 +32,7 @@
                 }
             }
         }
-          
-        }
+          }
+          }
     }
 }
