@@ -8,8 +8,7 @@
 	                }
           
           stage('Setup parameters') {
-            steps {
-                    properties([
+                properties([
                         parameters([
                             choice(
                                 defaultValue: 'RELEASE', 
@@ -32,7 +31,7 @@
                 }
             }
         }
-          }
+          
         }
     }
 }
