@@ -12,8 +12,7 @@ pipeline{
       choice choices: ['', 'RELEASE', 'DEBUG'], 
       name: '$build.gardle'
      }
-      if
-      stage("Android Release"){
+  stage("Android Release"){
          if steps{
               bat './gradlew assembleRelease'
           else
