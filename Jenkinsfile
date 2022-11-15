@@ -16,14 +16,14 @@ pipeline{
                             choice(
                                 defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: "$Build.gardle"
+                                name: '$Build.gardle'
                             ),
                         ])
                     ])
 		stage('Build release'){
             when {
                 expression {
-                   return params."$Build.gardle" == "RELEASE"
+                   return "$params.Build.gardle" == "RELEASE"
                 }
             }
              steps{
@@ -35,7 +35,7 @@ pipeline{
         stage('Build debug'){
             when {
                 expression {
-                   return params."$Build.gardle" == "DEBUG"
+                   return "$params.Build.gardle" == "DEBUG"
                 }
             }
             steps{
