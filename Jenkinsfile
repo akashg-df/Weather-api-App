@@ -14,9 +14,9 @@ pipeline{
                     properties([
                         parameters([
                             choice(
-                                defaultValue: "RELEASE", 
-                                choices: ["RELEASE", "DEBUG"], 
-                                name: "$Build.gardle"
+                                defaultValue: 'RELEASE', 
+                                choices: ['RELEASE', 'DEBUG'], 
+                                name: '$Build.gardle'
                             ),
                         ])
                     ])
