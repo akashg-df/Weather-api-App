@@ -15,31 +15,31 @@ pipeline{
                         parameters([
                             choice(
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: 'Build.gardle'
+                                name: '$Build.gardle'
                             ),
                         ])
                     ])
 	 stage('Build release'){
             when {
                 expression {
-                   return params.'Build.gardle' == 'RELEASE'
+                   return params.'$Build.gardle' == 'RELEASE'
                 }
             }
              steps{
                 script {"
-                  bat ${params.Build.gardle}"
+                  bat "\"${Build.gardle}\" gradlew assembleRelease"
                  }
              }
         }
         stage('Build debug'){
             when {
                 expression {
-                   return params.'Build.gardle' == 'DEBUG'
+                   return params.'$Build.gardle' == 'DEBUG'
                 }
             }
             steps{
                 script {
-                bat ${params.Build.gardle}"
+                    bat "\"${Build.gardle}\" gradlew assembledebug"
                  }
                 }
                }
