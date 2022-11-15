@@ -7,17 +7,19 @@ pipeline{
           git 'https://github.com/akashg-df/Weather-api-App'
           }
       }
-  stages{
+
       stage ("parameters") {
       choice choices: ['', 'RELEASE', 'DEBUG'], 
       name: '$build.gardle'
      }
+      
       stage("Android Release"){
           steps{
               bat './gradlew assembleRelease assembledebug'
           }
          
       }
+      
          stage("Android Debug"){
             steps{
                 bat 'gradlew assembledebug'
@@ -30,6 +32,7 @@ pipeline{
       bat './gradlew testDebugUnitTest'
     }
   }  
-  }
+  
   }
 }
+ 
