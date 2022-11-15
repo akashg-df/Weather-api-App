@@ -29,7 +29,7 @@ pipeline{
             steps{
                 script {
                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                    bat "\"${build.gardle}\" /Source/project-GRDK.sln /t:Rebuild  /p:configuration=\"Release Steam \""
+                    bat "\"${build.gardle}\" =\"gradlew assembleRelease \""
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline{
             steps{
                 script {
                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                    bat "\"${build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug Steam \""
+                    bat "\"${build.gardle}\"=\"gradlew assembleRelease \""
                 }
             }
         }
