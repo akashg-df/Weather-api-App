@@ -28,7 +28,7 @@ pipeline{
             }
              steps{
                 script {
-                    bat ./"${Build.gardle}/" gradlew assembleRelease" 
+                    bat ./" gradlew assembleRelease" 
 			
                  }
              }
@@ -41,7 +41,7 @@ pipeline{
             }
             steps{
                 script {
-                   bat .${Build.gardle}/" gradlew assembleRelease"
+                   bat ./" gradlew assembleRelease"
                  }
              }
         }
