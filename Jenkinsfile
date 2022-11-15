@@ -28,7 +28,7 @@ pipeline{
             }
              steps{
                 script {
-                   bat './gradlew assembleRelease'
+                   bat "./gradlew assembleRelease"
                  }
              }
         }
@@ -40,7 +40,7 @@ pipeline{
             }
             steps{
                 script {
-                  bat './gradlew assembleDebug'
+                  bat "./gradlew assembleDebug"
                   }
                 }
               }
