@@ -16,33 +16,31 @@ pipeline{
                             choice(
                                 defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: '$Build.gardle'
+                                name: 'Build.gardle'
                             ),
                         ])
                     ])
-			 stage('Build release'){
+	 stage('Build release'){
             when {
                 expression {
-                   return params.'$Build.gardle' == 'RELEASE'
+                   return params.'Build.gardle' == 'RELEASE'
                 }
             }
              steps{
-                script {
-                  def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                  bat ./"${Build.gardle}\" gradlew assembleRelease"
+                script {"
+                  bat ./"${params.Build.gardle}"
                  }
              }
         }
         stage('Build debug'){
             when {
                 expression {
-                   return params.'$Build.gardle' == 'DEBUG'
+                   return params.'Build.gardle' == 'DEBUG'
                 }
             }
             steps{
                 script {
-                  def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                  bat ./"${Build.gardle}\" gradlew assembleRelease"
+               bat ./"${ params.Build.gardle}"
                  }
              }
         }
