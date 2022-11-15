@@ -14,7 +14,6 @@ pipeline{
                     properties([
                         parameters([
                             choice(
-                                defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
                                 name: 'Build.gardle'
                             ),
@@ -42,10 +41,10 @@ pipeline{
                 script {
                bat .\"${ params.Build.gardle}"
                  }
-             }
-        }
- 	                       }
+                }
+               }
+ 	     }
             }
           }
         }
-}
+      }
