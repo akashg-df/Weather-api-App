@@ -16,7 +16,7 @@ pipeline{
                             choice(
                                 defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: '$Build.gardle'
+                                name: "$Build.gardle"
                             ),
                         ])
                     ])
