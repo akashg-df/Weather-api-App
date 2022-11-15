@@ -13,7 +13,7 @@ pipeline{
       name: '$build.gardle'
      }
   stage("Android Release"){
-         if steps{
+         if params.build.gradle = Release 
               bat './gradlew assembleRelease'
           else
                bat '/gradlew assembledebug'
@@ -29,4 +29,3 @@ pipeline{
         }
  }
   }
-}
