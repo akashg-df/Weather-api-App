@@ -1,5 +1,5 @@
 pipeline{
-	    agent any
+	agent any
 	   
 	    stages{
 	        stage("SCM Checkout"){
@@ -8,26 +8,27 @@ pipeline{
 	            }
 	        }
 	         
-          stage('Setup parameters') {
+        stage('Setup parameters') {
             steps {
                 script { 
                     properties([
                         parameters([
                             choice(
+                                defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
                                 name: '$Build.gardle'
                             ),
                         ])
                     ])
-	 stage('Build release'){
+		stage('Build release'){
             when {
                 expression {
                    return params.'$Build.gardle' == 'RELEASE'
                 }
             }
              steps{
-                script {"
-                  bat "\"${params.Build.gardle}\" gradlew assembleRelease"
+                script {
+                   bat "\"${Build.gardle}\" gradlew assembleRelease"
                  }
              }
         }
@@ -39,12 +40,12 @@ pipeline{
             }
             steps{
                 script {
-                    bat "\"${params.Build.gardle}\" gradlew assembledebug"
-                 }
+                  bat "\"${Build.gardle}\" gradlew assembleDebug"
+                  }
                 }
-               }
- 	     }
-            }
+              }
+ 	        }
           }
         }
       }
+    }
