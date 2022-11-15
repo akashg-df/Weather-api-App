@@ -27,7 +27,7 @@ pipeline{
             }
              steps{
                 script {"
-                  bat .\"${params.Build.gardle}"
+                  bat ${params.Build.gardle}"
                  }
              }
         }
@@ -39,7 +39,7 @@ pipeline{
             }
             steps{
                 script {
-               bat .\"${ params.Build.gardle}"
+                bat ${params.Build.gardle}"
                  }
                 }
                }
