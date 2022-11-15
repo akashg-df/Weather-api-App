@@ -16,33 +16,33 @@ pipeline{
                             choice(
                                 defaultValue: 'RELEASE', 
                                 choices: ['RELEASE', 'DEBUG'], 
-                                name: 'BUILD_CONFIG'
+                                name: 'build.gradle'
                             ),
                         ])
                     ])
 			 stage('Build release'){
             when {
                 expression {
-                   return params.BUILD_CONFIG == 'RELEASE'
+                   return params.build.gardle == 'RELEASE'
                 }
             }
             steps{
                 script {
                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                    bat "\"${msbuild}\" /Source/project-GRDK.sln /t:Rebuild  /p:configuration=\"Release Steam D3D11\""
+                    bat "\"${build.gardle}\" /Source/project-GRDK.sln /t:Rebuild  /p:configuration=\"Release Steam \""
                 }
             }
         }
         stage('Build debug'){
             when {
                 expression {
-                   return params.BUILD_CONFIG == 'DEBUG'
+                   return params.build.gardle == 'DEBUG'
                 }
             }
             steps{
                 script {
                     def msbuild = tool name: 'MSBuild', type: 'hudson.plugins.msbuild.MsBuildInstallation'
-                    bat "\"${msbuild}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug Steam D3D11\""
+                    bat "\"${build.gardle}\" /Source/project-GRDK.sln /t:Rebuild /p:configuration=\"Debug Steam \""
                 }
             }
         }
