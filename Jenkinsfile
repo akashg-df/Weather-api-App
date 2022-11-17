@@ -5,12 +5,7 @@ pipeline {
 	        choice(name: "$build.gradle", choices: ["", "WS", "Debug", "Release"])
 	          }
 	  stages {
-	     stage("Build") {
-	            steps {
-	                bat "./gradlew build"
-	            }
-	        }
-	  stage("Debug) {
+	      stage("Debug) {
 	            parallel {
 	                stage('Debug') {
 	                    when { expression { !params.Debug } }
