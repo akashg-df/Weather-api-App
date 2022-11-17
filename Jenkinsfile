@@ -1,13 +1,13 @@
 pipeline {
 	 agent any
 	    parameters {
-	        booleanParam(name: "RELEASE", defaultValue: false)
-	        choice(name: "build.gradle", choices: ["", "WS", "Debug", "Release"])
+	        booleanParam(name: "$build.gradle", defaultValue: false)
+	        choice(name: "$build.gradle", choices: ["", "WS", "Debug", "Release"])
 	          }
 	  stages {
 	     stage("Build") {
 	            steps {
-	                sh "./gradlew build"
+	                bat "./gradlew build"
 	            }
 	        }
 	  stage("Debug) {
@@ -15,13 +15,13 @@ pipeline {
 	                stage('Debug') {
 	                    when { expression { !params.Debug } }
 	                    steps {
-	                        sh "./gradlew Debug"
+	                       bat "./gradlew assembleDebug"
 	                    }
 	                }
 	   stage("Release") {
 	                    when { expression { params.RELEASE } }
 	                    steps {
-	                        sh "./gradlew release"
+	                        bat "./gradlew assembleRelease"
 	                    }
 	                }
 	            }
