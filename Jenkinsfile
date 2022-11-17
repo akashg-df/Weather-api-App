@@ -1,8 +1,7 @@
 pipeline {
 	 agent any
 	    parameters {
-	        booleanParam(name: "$build.gradle", defaultValue: false)
-	        choice(name: "$build.gradle", choices: ["", "Debug", "Release"])
+	     choice(name: "$build.gradle", choices: ["", "Debug", "Release"])
 	          }
 	  stages {
 	      stage("Debug) {
