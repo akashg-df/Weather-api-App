@@ -12,7 +12,7 @@ pipeline {
 	        }
 	  stage("Debug) {
 	            parallel {
-	                stage('Pre-Release') {
+	                stage('Debug') {
 	                    when { expression { !params.Debug } }
 	                    steps {
 	                        sh "./gradlew Debug"
