@@ -1,25 +1,37 @@
-pipeline {
-	 agent any
-	    parameters {
-	     choice(name: "$build.gradle", choices: ["", "Debug", "Release"])
-	          }
-	  stages {
-	      stage("Debug) {
-	            parallel {
-	                stage('Debug') {
-	                    when { expression { !params.Debug } }
-	                    steps {
-	                       bat "./gradlew assembleDebug"
-	                    }
-	                }
-	   stage("Release") {
-	                    when { expression { params.RELEASE } }
-	                    steps {
-	                        bat "./gradlew assembleRelease"
-	                    }
-	                }
-	            }
-	        }              
-	      }	
-	    }
-	}
+pipeline{
+  agent any
+ 
+  stages{
+      stage("SCM Checkout"){
+          steps{
+          git 'https://github.com/akashg-df/Weather-api-App'
+          }
+      }
+       stage("Android Release"){
+         steps{
+              bat './gradlew assembleRelease'
+              }
+         
+      }
+      
+//          stage("Android Debug"){
+//             steps{
+//                 bat 'gradlew assembledebug'
+//             }
+         
+//         }
+ 
+  
+
+   stage('Unit test') {
+    steps {
+      // Compile and run the unit tests for the app and its dependencies
+      bat './gradlew testDebugUnitTest'
+    }
+  }  
+  
+  }
+}
+ 
+
+
